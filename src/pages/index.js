@@ -13,6 +13,7 @@ export default function Home() {
           <p>UX designer & web developer based in Innsbruck.</p>
           <Link className={styles.btn} to={"/projects"}>My Portfolio Projects</Link>
         </div>
+        <img src={"/image.jpg"} style={{ maxWidth: '100%' }}/>
       </section>
     </Layout>
   )
