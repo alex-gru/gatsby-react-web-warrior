@@ -5,7 +5,8 @@ import { graphql, Link } from "gatsby"
 
 function Projects({ data }) {
   console.log(data)
-  const projects = data.allMarkdownRemark.nodes
+  const projects = data.projects.nodes
+  const contact = data.contact.siteMetadata.contact
 
   return (
     <Layout>
@@ -13,16 +14,16 @@ function Projects({ data }) {
         <h2>Portfolio</h2>
         <h3>Projects & Websites I've created</h3>
         <div className={styles.projects}>
-          { projects.map(project => (
+          {projects.map(project => (
             <Link to={"/projects/" + project.frontmatter.slug} key={project.id}>
-            <div>
-              <h3>{ project.frontmatter.title }</h3>
-              <p>{ project.frontmatter.stack }</p>
-            </div>
+              <div>
+                <h3>{project.frontmatter.title}</h3>
+                <p>{project.frontmatter.stack}</p>
+              </div>
             </Link>
           ))}
         </div>
-
+        <p>Like what you see? Email me at <a href={"mailto:" + contact }>{ contact }</a> for a quote.</p>
       </div>
     </Layout>
   )
@@ -31,16 +32,23 @@ function Projects({ data }) {
 export default Projects
 export const query = graphql`
   query ProjectsPage {
-  allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
-    nodes {
-      frontmatter {
-        slug
-        stack
-        title
-        date
+    projects: allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      nodes {
+        frontmatter {
+          slug
+          stack
+          title
+          date
+        }
+        id
       }
-      id
+    }
+    contact: site {
+      siteMetadata {
+        contact
+      }
     }
   }
-}
 `
