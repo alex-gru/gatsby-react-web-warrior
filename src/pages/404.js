@@ -1,13 +1,14 @@
 import React from "react"
+import Layout from "../components/Layout"
 
-function
-
-NotFound(props) {
+function NotFound(props) {
   return (
-    <div>
-      <h2>404</h2>
-      <p>Sorry, not found.</p>
-    </div>
+    <Layout>
+      <div>
+        <h2>404</h2>
+        <p>Sorry, not found.</p>
+      </div>
+    </Layout>
   )
 }
 
